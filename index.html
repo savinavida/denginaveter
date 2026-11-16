@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f4efe5">
+  <meta name="description" content="Деньги на ветер — простой калькулятор бюджета путешествия.">
+  <title>Деньги на ветер — калькулятор путешествий</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <div class="page-shell">
+    <header class="topbar">
+      <a class="brand" href="#" aria-label="Деньги на ветер — главная">
+        <span class="brand-mark" aria-hidden="true">↗</span>
+        <span>деньги <i>на ветер</i></span>
+      </a>
+      <span class="top-note"><span class="status-dot"></span> Калькулятор приключений</span>
+    </header>
+
+    <main>
+      <section class="intro">
+        <div class="intro-copy">
+          <p class="eyebrow">ПЛАНИРУЙ. ПУТЕШЕСТВУЙ. НЕ ПАНИКУЙ.</p>
+          <h1>Деньги<br><span>на ветер</span><sup>✳</sup></h1>
+          <p class="tagline">Прикинь заранее, что и почём в твоём приключении. Ведь только тогда будет красиво и не больно.</p>
+        </div>
+        <div class="travel-doodle" aria-hidden="true">
+          <div class="sun"></div>
+          <div class="route route-one"></div>
+          <div class="route route-two"></div>
+          <div class="plane">✈</div>
+          <div class="stamp">GO<br>WILD</div>
+          <span class="doodle-caption">куда глаза<br>глядят →</span>
+        </div>
+      </section>
+
+      <section class="workspace" aria-label="Калькулятор бюджета">
+        <form id="budget-form" novalidate>
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">01 / ВВОДНЫЕ ДАННЫЕ</p>
+              <h2>Собираем чемодан цифр</h2>
+            </div>
+            <span class="step-pill">ТВОЯ ПОЕЗДКА</span>
+          </div>
+
+          <div class="trip-grid">
+            <label class="field">
+              <span class="field-label">Путешественников</span>
+              <span class="input-wrap"><input name="people" type="number" min="1" step="1" value="2" required><span class="unit">чел.</span></span>
+            </label>
+            <label class="field">
+              <span class="field-label">Дней в пути</span>
+              <span class="input-wrap"><input name="days" type="number" min="1" step="1" value="7" required><span class="unit">дней</span></span>
+            </label>
+            <label class="field">
+              <span class="field-label">Ночей</span>
+              <span class="input-wrap"><input name="nights" type="number" min="0" step="1" value="6" required><span class="unit">ночей</span></span>
+            </label>
+          </div>
+
+          <div class="section-heading costs-heading">
+            <div>
+              <p class="eyebrow">02 / ДЕНЬГИ-ДЕНЬЖАТА</p>
+              <h2>На что улетит бюджет?</h2>
+              <p class="section-hint">Указывай общую сумму за всю поездку и за всех участников.</p>
+            </div>
+            <span class="currency-tag">ВСЁ В EUR €</span>
+          </div>
+
+          <div class="cost-grid">
+            <label class="cost-field">
+              <span class="cost-icon transport">↗</span>
+              <span class="cost-copy"><strong>Транспорт</strong><small>Самолёты, поезда, ноги</small></span>
+              <span class="money-input"><input name="transport" type="number" min="0" step="0.01" value="240" placeholder="0.00"><b>€</b></span>
+            </label>
+            <label class="cost-field">
+              <span class="cost-icon stay">⌂</span>
+              <span class="cost-copy"><strong>Проживание</strong><small>Крыша над головой</small></span>
+              <span class="money-input"><input name="stay" type="number" min="0" step="0.01" value="420" placeholder="0.00"><b>€</b></span>
+            </label>
+            <label class="cost-field">
+              <span class="cost-icon food">♨</span>
+              <span class="cost-copy"><strong>Питание</strong><small>Кофе тоже считается</small></span>
+              <span class="money-input"><input name="food" type="number" min="0" step="0.01" value="280" placeholder="0.00"><b>€</b></span>
+            </label>
+            <label class="cost-field">
+              <span class="cost-icon fun">✳</span>
+              <span class="cost-copy"><strong>Развлечения</strong><small>Экскурсии и «вау!»</small></span>
+              <span class="money-input"><input name="fun" type="number" min="0" step="0.01" value="160" placeholder="0.00"><b>€</b></span>
+            </label>
+            <label class="cost-field">
+              <span class="cost-icon other">＋</span>
+              <span class="cost-copy"><strong>Прочее</strong><small>Сувениры и сюрпризы</small></span>
+              <span class="money-input"><input name="other" type="number" min="0" step="0.01" value="100" placeholder="0.00"><b>€</b></span>
+            </label>
+          </div>
+
+          <div class="form-footer">
+            <p><span class="asterisk">*</span> Все суммы — на всю компанию, не на одного героя.</p>
+            <button class="calculate-btn" type="submit">Рассчитать бюджет <span aria-hidden="true">↗</span></button>
+          </div>
+          <p id="form-error" class="form-error" role="alert" aria-live="polite"></p>
+        </form>
+
+        <section class="results" id="results" aria-live="polite" aria-label="Результаты расчёта">
+          <div class="results-top">
+            <div>
+              <p class="eyebrow">03 / ИТОГО ПО ПЛАНУ</p>
+              <h2>Вот сколько стоит<br>это приключение</h2>
+            </div>
+            <span class="receipt-mark" aria-hidden="true">€</span>
+          </div>
+          <div class="total-card">
+            <div class="total-label">ОБЩИЙ БЮДЖЕТ ПОЕЗДКИ</div>
+            <div class="total-value" id="total">1 200,00 <span>€</span></div>
+            <div class="total-foot"><span class="status-dot"></span><span id="trip-summary">2 путешественника · 7 дней · 6 ночей</span></div>
+          </div>
+          <div class="stats-grid">
+            <div class="stat-card">
+              <span class="stat-icon">☺</span>
+              <span class="stat-label">На одного человека</span>
+              <strong id="per-person">600,00 €</strong>
+            </div>
+            <div class="stat-card">
+              <span class="stat-icon">◷</span>
+              <span class="stat-label">В среднем за день</span>
+              <strong id="per-day">171,43 €</strong>
+            </div>
+          </div>
+          <div class="chart-card">
+            <div class="chart-heading">
+              <div><p class="eyebrow">КУДА УЛЕТАЮТ ЕВРО</p><h3>Структура расходов</h3></div>
+              <span class="chart-note">доли от общего</span>
+            </div>
+            <div class="chart-content">
+              <div class="donut" id="donut" role="img" aria-label="Диаграмма распределения расходов">
+                <div class="donut-hole"><strong id="chart-total">1 200 €</strong><span>ВСЕГО</span></div>
+              </div>
+              <ul class="legend" id="legend">
+                <li><span class="legend-dot transport"></span><span>Транспорт</span><b>20,00%</b></li>
+                <li><span class="legend-dot stay"></span><span>Проживание</span><b>35,00%</b></li>
+                <li><span class="legend-dot food"></span><span>Питание</span><b>23,33%</b></li>
+                <li><span class="legend-dot fun"></span><span>Развлечения</span><b>13,33%</b></li>
+                <li><span class="legend-dot other"></span><span>Прочее</span><b>8,33%</b></li>
+              </ul>
+            </div>
+          </div>
+          <p class="result-note"><span>✳</span> Цифры посчитаны. Осталось собрать вещи и не забыть паспорт.</p>
+        </section>
+      </section>
+    </main>
+
+    <footer><span>ДЕНЬГИ НА ВЕТЕР © 2025</span><span>СМЕЛЕЕ МЕЧТАЙ. УМНЕЕ СЧИТАЙ. ↗</span></footer>
+  </div>
+</body>
+</html>
